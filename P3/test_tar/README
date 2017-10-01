@@ -1,0 +1,47 @@
+CS457, Fall 2016
+Project 3
+12/6/2016
+
+Team Members: Michael Ferguson, Sadie Henry
+(The 3rd teammate, Bolin Liu, did not contribute any code to this project)
+
+PROJECT DESCRIPTION:
+This project simulates routers in a network. These routers are "spawned" by the manager program and use the Link State Routing protocol to send/receive packets to/from each other. The manager instructs the routers to send a packet from one router to another. 
+
+HOW TO RUN:
+To compile the program, type and enter "make". 
+To clean up .o files and executables, type and enter "make clean".
+To run the program, use the following command:
+
+	./manager <input file>
+
+The input file should be in the following format (this must be correct as the program does not check for file correctness):
+
+	<number of nodes>
+	<source node> <destination node> <cost> 
+	-1
+	<start node> <end node> 
+	-1
+
+You can have up to 9 nodes. You can have as many <start node>,<end node> instruction pairs as you would like, but keep in mind that adding more instructions will add to the total runtime of the program.
+
+When you run the program, it will show that the manager and router processes are starting and then show that it is waiting for the routers. During this time, the routers will perform the link state algorithm and then receive and execute instructions from the manager. There is a 5 second pause between each instruction sent from the router, so it can take some time for the program to run if you have many instructions. When the program is finished, it will indicate that the program is exiting successfully and direct you to the output files that were created by the program.
+
+OUTPUT FILES:
+The program will produce one file called "manager.out" and one file per node called "router*.out", where * is the router number.
+
+The manager.out file first lists the topology read from the input file. Then it shows that it is listening for, starting, and communicating with routers. It then shows that the routers have reported that they are ready. Then it lists the instructions sent to the routers. After the instructions are sent, it shows that "quit" is sent to each router and then exits.
+
+The router file shows that it is connected to the manager and that it sends an intial message to the manager. Then, it shows the router info that it received from the manager which lists its ID, UDP Port, Number of Neighbors, and Neighbor Information. It then shows that it receives router info packets and sends router info packets to and from other routers. These packets contain the same information that is listed when it receives its information from the manager, so we don't list all of the packet information since it clutters the file and can be found in each file. Then the file shows that the router is running the link state algorithm. When the algorithm is complete, it shows the routing table that was computed during the link state algorithm. Then it shows the packets that it receives from the manager and other routers and the packets it sends to other routers during the instruction part of the program. Then it shows that it received a quit message from the manager and shows that it is exiting. 
+
+MESSAGE FORMATS:
+The following message formats are used in the program and are described in the project3.h file:
+	packet_header
+	packet
+	router_packet
+	neighbor
+	router_node
+	
+FINAL REMARKS:
+To our knowledge, this program runs without errors and should perform as described on the Project 3 Assignment page. This program runs on TCP port 55555 and the UDP ports start at 50000 and increase - this can be changed in project3.h.
+	

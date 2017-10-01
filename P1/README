@@ -1,0 +1,42 @@
+CS457 Programming Assignment 1
+Sadie Henry
+9/15/2016
+
+The simple chat program allows a server and client to chat back and forth. This program is implemented in c++ and uses a custom struct that is cast to a char array (and vice versa) to transfer packets from client to server (and vice versa). The basic concept is as follows:
+
+	Server:
+		1. Get host info and print the IP address and port of the server. 
+		2. Create a socket and bind it to the port.
+		3. Listen for and connect to the client.
+		4. Receive a message from the client.
+		5. Send a message to the client.
+		6. Repeat 4 & 5.
+		7. When finished, terminate the program with a ^C command. 
+
+	Client:
+		1. Take the IP and port passed as arguments and create a sockaddr_in.
+		2. Create a socket.
+		3. Connect to server with sockaddr and socket.
+		4. Send a message to the server.
+		5. Receive a message from the server.
+		6. Repeate 4 & 5.
+		7. When finished, terminate the program with a ^C command.
+
+To run the program, do the following (I am using port 20001):
+
+	Run as a server: ./chat
+	Run as a client (option 1): ./chat -s <IP of server> -p <port number>
+	Run as a client (option 2): ./chat -p <port number> -s <IP of server>
+
+To get help with running the program, do the following:
+
+	Get help: ./chat -h
+
+Any commands besides the ones listed will return an error. 
+
+When prompted by "You: ", enter a message to send to the client/server. Messages must be 140 characters or less (including the terminating character that is automatically added, so don't enter more than 139 characters). If you enter a message greater than 140 characters, you will be prompted to re-enter your message.
+
+**If the server/client quits, the client/server may need to send a couple of messages before they realize that the server/client has quit, but it will eventually quit. 
+
+
+		
